@@ -5,45 +5,92 @@
 ## AIM:
 TO Create a player movement using pawn,collectable,player health and score.
 
-## STEPS REQUIRED:
-1)Create a new Unreal project and select a suitable template. Depending on the type of game you want to create, you may choose the third-person template, the side-scrolling template, or any other template that suits your needs.
+## STEPS REQUIRED:To create and destroy the coin:
+Create a new project in Unreal Engine and choose a template that suits your needs.
 
-2)Create a new level for your game. This level will be where you place the coins and any other objects that the player can interact with.
+Add a new actor to the level and call it "Coin".
 
-3)Create a new Unreal project and select a suitable template. Depending on the type of game you want to create, you may choose the third-person template, the side-scrolling template, or any other template that suits your needs.
+Create a new blueprint based on the Coin actor by selecting it in the Content Browser and choosing "Create Blueprint".
 
-4)Create a new level for your game. This level will be where you place the coins and any other objects that the player can interact with.
+Open the Coin blueprint and add a static mesh component to represent the coin. You can import a 3D model or use one of the default shapes provided by Unreal Engine.
 
-5)Add a player character to the level. This character will be the avatar that the player controls to collect the coins. You can either use a default character provided by Unreal or create a custom one using Unreal's character creation tools.
+Add a collision component to the Coin blueprint so that the player can interact with it. Choose a simple collision shape like a sphere or a box.
 
-6)Place coins in the level. You can use Unreal's mesh editor to create coin models or import them from external software. Place the coins in various locations throughout the level.
+Add a variable to the Coin blueprint to keep track of whether the coin has been collected or not. Call it "IsCollected" and set its default value to false.
 
-7)Set up the coin collecting mechanics. Create a blueprint for the coins that enables them to detect when the player character collides with them. When a collision occurs, the coin should disappear and the player's score should increase. You can use Unreal's visual scripting language, Blueprint, to create this behavior.
+Create a new blueprint based on the player character by selecting it in the Content Browser and choosing "Create Blueprint".
 
-8)Create a scoring system. Keep track of the number of coins the player has collected using a variable in the player character blueprint. Display the score on the screen using a UI widget.
+Open the player blueprint and add a collision component to represent the player's interaction with the coins.
 
-9)Create a new level for the main menu UI. In this level, create a new widget blueprint for the main menu UI. Use the widget editor to add buttons for starting a new game, viewing high scores, and exiting the game.
+Add an event to the player blueprint that gets triggered when the player collides with a coin. Use a collision event and check if the collided actor is a coin.
 
-10)Create a new level for the health UI. In this level, create a new widget blueprint for the health UI. Use the widget editor to add an image or text to display the player's health, as well as any other information you want to convey to the player.
+If the collided actor is a coin, check if it has already been collected. If not, set its IsCollected variable to true and add its value to a score variable in the player blueprint.
 
-11)Add a reference to the health UI widget in the player character blueprint. This will allow you to update the health display based on the player's current health.
+Remove the coin from the level by calling its Destroy function.
 
-12)Add a reference to the main menu UI widget in the game mode blueprint. This will allow you to switch between the main game level and the main menu level.
-
-13)Add a button to the health UI that allows the player to return to the main menu. When the player clicks this button, set a variable in the game mode blueprint that triggers a level change to the main menu level.
+Add several instances of the Coin actor to the level and adjusttheir positions so that they are spread out and not too close to each other.
 
 ## OUTPUT:
-Pawn Movement Event Graph:
-![243105301-48de8e1f-c4a4-4489-a7fe-957e30d8d03f](https://github.com/durga46/experiment2.gamepro/assets/75235704/49480541-fb2e-4574-be89-f2e9b5d85e23)
+
+### Starting position of the player:
+![image](https://github.com/durga46/experiment2.gamepro/assets/75235704/2ba49e0e-c0c8-4284-89bf-c8cb56e8c694)
+
+## PROCEDURE:
+
+### To redirect to levels:
+
+Create a new level or open an existing one.
+
+Add a new widget blueprint by going to the Content Browser and right-clicking in the desired folder. Select User Interface and then Widget Blueprint.
+
+Design your menu by adding buttons and other UI elements to the widget. You can use images, text, and other widgets to create a visually appealing menu.
+
+Add a button to your menu by dragging and dropping a Button widget from the Palette onto your canvas.
+
+In the Button's properties, scroll down to the On Click section and click the + button next to the On Click event.
+
+Create a new custom event by clicking the New Binding button and selecting Custom Event.
+
+Name the custom event "LoadScene" or something similar.
+
+Open the Level Blueprint by going to the Blueprint menu and selecting Open Level Blueprint.
+
+Drag and drop your menu widget from the Content Browser into the Level Blueprint.
+
+Create a new variable in the Level Blueprint by clicking the Add Variable button in the My Blueprint panel. Name the variable "MenuWidget" or something similar and set its type to the widget blueprint you created earlier.
+
+In the Level Blueprint, drag from the MenuWidget variable and select Set to set the variable's value to the instance of the menu widget you added to the level.
+
+Create a new function in the Level Blueprint by clicking the Add Function button in the My Blueprint panel. Name the function "LoadScene" or something similar.
+
+Drag from the MenuWidget variable and select Get to get the instance of the menu widget.
+
+Drag from the Get node and select Remove From Parent to remove the menu widget from the screen.
+
+Drag from the LoadScene custom event and select Open Level to open the desired level or scene.
+
+Connect the nodes in the LoadScene function as follows: LoadScene -> Remove From Parent -> Open Level.
+
+Go back to your menu widget and select the button you added Earlier.
+
+In the Button's properties, scroll down to the On Click section and select the LoadScene custom event you created earlier.
+
+Save your changes and playtest your game. When the player clicks on the button in the menu, the menu widget will be removed and the desired level or scene will be loaded.
+
+## CONNECTIONS:
 
 
-![243105302-e9b90413-1443-4f5c-af80-a0b01aee4840](https://github.com/durga46/experiment2.gamepro/assets/75235704/15194755-5247-40cb-acac-7ad29b2db2ad)
-
-![image](https://github.com/durga46/experiment2.gamepro/assets/75235704/dc05f26b-e21a-476b-aa10-deca37f4dfb9)
-
+## Play Button:
+![242302850-f9abbce1-d07f-4486-a7f4-7b174e5fe11c](https://github.com/durga46/experiment2.gamepro/assets/75235704/82ef78f3-e0ca-4791-b556-48a3c8a66b94)
 
 
+## Quit Button:
+![242302872-d1572e81-d8ba-4e29-8927-517e30dcd69f](https://github.com/durga46/experiment2.gamepro/assets/75235704/d9444dcb-596a-4cb0-aba4-7e4561780692)
+
+
+## Back Button:
+![242302912-1fe733d1-d506-4d1d-a338-87dcea1f6193](https://github.com/durga46/experiment2.gamepro/assets/75235704/3d782faa-1e7e-408e-88e6-9fae4505a450)
 
 
 RESULT:
-Thus, we Created a player movement using pawn ,collectables ,player health and score.
+Thus, To Create a player movement using pawn, collectible, player health, and score created and developed by unreal Engine.
